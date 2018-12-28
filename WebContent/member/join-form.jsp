@@ -14,8 +14,8 @@
 		이름 입력<input type="text"	name="name" /> <br /> 
 		주민번호 입력<input type="text" name="ssn" /> <br />
 		비밀번호 입력<input type="text" name="pass" /> <br /> 
-		키 <input type ="" name = "height"> <br />
-		몸무게 <input type ="" name = "weight"> <br />
+		키 <input type ="text" name = "height"> <br />
+		몸무게 <input type ="text" name = "weight"> <br />
 		<input type="submit" id="btn" value="join" />
 	</form>
 </body>
