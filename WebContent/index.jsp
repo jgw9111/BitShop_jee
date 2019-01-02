@@ -12,6 +12,7 @@
 		<form action="member.do">
 			I D <input type="text" name = "id" /> <br />
 			P W <input type="text" name = "pass" /> <br />
+			<input type="hidden" name ="action" value="login" />
 			<input type="submit" id="btn" value = "login" />
 		</form>
 	</div>

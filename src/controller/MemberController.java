@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import command.Command;
+
 /**
  * Servlet implementation class MemberController
  */
@@ -17,16 +19,25 @@ public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
-		if(id.equals("test") && pass.equals("te")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/home/main.jsp");
-			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
-			rd.forward(request, response);
+		System.out.println("===member 서블릿으로 진입===");
+		String action = request.getParameter("action");
+		switch((action == null) ? "move": action) {
+		case"login":
+			System.out.println("action 이 로그인");
+			String id = request.getParameter("id");
+			String pass = request.getParameter("pass");
+			if(id.equals("test") && pass.equals("te")) {
+				Command.move(request, response,"home/main");
+			}else {
+				Command.move(request, response, "index");
+			}
+			break;
+		case"move": 
+			System.out.println("action 이 무브");
+			Command.move(request, response, "member/main");
+			break;
 		}
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
