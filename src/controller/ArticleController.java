@@ -21,18 +21,23 @@ public class ArticleController extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("=== article 서블릿으로 진입 ===");
-		String action = request.getParameter("action");
-		switch((action == null) ? "move": action) {
+		String cmd = request.getParameter("cmd");
+		String page = request.getParameter("page");
+		String dir = request.getParameter("dir");
+		if(dir==null) {
+			String dirPath = request.getServletPath();
+			dirPath = dirPath.replaceAll(".do","");
+			dir = dirPath.substring(1);
+		}
+		if(page==null) {page="main";}
+		switch((cmd == null) ? "move": cmd) {
 			case"move": 
 			System.out.println("action 이 무브");
-			Command.move(request, response, "article/main");
+			Command.move(request, response,dir+"/"+page);
 			break;
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

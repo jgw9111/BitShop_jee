@@ -19,8 +19,10 @@ public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("=== account 서블릿으로 진입 ===");
-		String action = request.getParameter("action");
-		switch((action == null) ? "move": action) {
+		String cmd = request.getParameter("cmd");
+		String dir = request.getParameter("dir");
+		String page = request.getParameter("page");
+		switch((cmd == null) ? "move": cmd) {
 			case"move": 
 			System.out.println("action 이 무브");
 			Command.move(request, response, "account/main");
