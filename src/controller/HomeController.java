@@ -12,18 +12,24 @@ import command.Command;
 public class HomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			String cmd = request.getParameter("cmd");
+			System.out.println("===홈컨트롤러===");
 			String dir = request.getParameter("dir");
-			String page = request.getParameter("page");
-			if(page==null) {page="main";}
-			if(dir==null) {
+			System.out.println("dir::"+dir);
+			if(dir == null ) {
 				String dirPath = request.getServletPath();
 				dirPath = dirPath.replace(".do","");
 				dir = dirPath.substring(1);
-			}
-			switch( (cmd==null)?"move":cmd ) {
+			}System.out.println("2 dir::"+dir);
+			String cmd = request.getParameter("cmd");
+			cmd = (cmd == null) ? "move" : cmd;
+			String page = request.getParameter("page");
+			if(page==null) {page="main";}
+		
+			System.out.println("cmd::"+cmd);
+			System.out.println("page::"+page);
+			switch( cmd ) {
 			case"move": 
-				Command.move(request, response, dir+"/"+page);
+				Command.move(request, response, dir,page);
 				break;
 			}
 		

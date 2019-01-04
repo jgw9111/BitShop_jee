@@ -19,13 +19,29 @@ public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("=== account 서블릿으로 진입 ===");
-		String cmd = request.getParameter("cmd");
 		String dir = request.getParameter("dir");
+		if(dir == null ) {
+			String dirPath = request.getServletPath();
+			dirPath = dirPath.replace(".do","");
+			dir = dirPath.substring(1);
+		}
+		System.out.println("dir :: "+ dir);
+		String cmd = request.getParameter("cmd");
+		cmd = (cmd == null) ? "move" : cmd;
 		String page = request.getParameter("page");
-		switch((cmd == null) ? "move": cmd) {
+		if(page==null) {page="main";}
+		System.out.println("page ::"+ page);
+		
+		switch(cmd) {
+			case"open-account": 
+				System.out.println("=== 계좌 오픈 ===");
+				String deposit = request.getParameter("money");
+				System.out.println("deposit ::"+ deposit);
+				Command.move(request, response,dir,page);	
+			break;
 			case"move": 
 			System.out.println("action 이 무브");
-			Command.move(request, response, "account/main");
+			Command.move(request, response, dir,page);
 			break;
 		}
 	}

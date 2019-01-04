@@ -21,19 +21,20 @@ public class ArticleController extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("=== article 서블릿으로 진입 ===");
-		String cmd = request.getParameter("cmd");
-		String page = request.getParameter("page");
 		String dir = request.getParameter("dir");
-		if(dir==null) {
+		if(dir == null ) {
 			String dirPath = request.getServletPath();
-			dirPath = dirPath.replaceAll(".do","");
+			dirPath = dirPath.replace(".do","");
 			dir = dirPath.substring(1);
 		}
+		String cmd = request.getParameter("cmd");
+		cmd = (cmd == null) ? "move" : cmd;
+		String page = request.getParameter("page");
 		if(page==null) {page="main";}
-		switch((cmd == null) ? "move": cmd) {
+		switch(cmd) {
 			case"move": 
 			System.out.println("action 이 무브");
-			Command.move(request, response,dir+"/"+page);
+			Command.move(request, response,dir,page);
 			break;
 		}
 	}

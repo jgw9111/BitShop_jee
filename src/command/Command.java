@@ -10,13 +10,18 @@ import pool.Constant;
 
 public class Command {
 	
-	public static void move(HttpServletRequest request, HttpServletResponse response,String path) throws ServletException, IOException {
+	public static void move(HttpServletRequest request, HttpServletResponse response,String dir, String page) throws ServletException, IOException {
+		
 		String dispatcher = "";
-		if(path.equals("index")) {
-			dispatcher = "/index"+ Constant.JSP;
+		
+		if(page.equals("index")) {
+			dispatcher = "index" + Constant.JSP;
+			
 		}else {
-			dispatcher = Constant.VIEW+ path +Constant.JSP;
+			dispatcher = Constant.VIEW + dir + "/" + page + Constant.JSP;
 		}
-		request.getRequestDispatcher(dispatcher).forward(request, response);
+		System.out.println(dispatcher);
+		request.getRequestDispatcher(dispatcher).forward(request,response);
+		
 	}
 }
