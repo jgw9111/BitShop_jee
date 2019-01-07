@@ -29,6 +29,7 @@ public class HomeController extends HttpServlet {
 			System.out.println("page::"+page);
 			switch( cmd ) {
 			case"move": 
+				System.out.println("HOME 컨트롤러");
 				Command.move(request, response, dir,page);
 				break;
 			}

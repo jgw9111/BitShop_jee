@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>BIT SHOP+계좌관리 페이지+</title>
-<link rel="stylesheet" href="<%=application.getContextPath() %>/resources/css/style.css "/>
-</head>
+<%@ include file="../home/head.jsp" %>
 <body>
 <table id="wrapper">
 	<tr>
@@ -22,15 +16,25 @@
 			<%@ include file="side-menu.jsp" %>
 		</td>
 		<td>
-			<div>
-				<form action="account.do">
-					<h1>계좌 개설</h1>
-					입금액 : <input type="text" name="money" />
-					<input type="submit" id="btn" value="확 인" />
-					<input type="hidden" name="cmd" value="open-account" />
-					<input type="hidden" name="page" value="open-result" />
-				</form>
-			</div>
+		<%
+		String dest = request.getAttribute("dest")+"";
+		System.out.println("account메인 dest ::" + dest);
+		switch(dest){
+		case"NONE": %>
+			<%@ include file="accountPage.jsp" %>
+		<%
+		break;
+		case"open-form": 
+		%>
+		<%@ include file="open-form.jsp" %>
+		<%
+		break;
+		case"open-result":
+			%> <%@ include file="open-result.jsp" %>
+			<%
+			break;
+		}
+		%>
 		</td>
 	</tr>
 	<tr>

@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import command.Command;
+import domain.AccountBean;
+import service.AccountService;
+import service.AccountServiceImpl;
 
 /**
  * Servlet implementation class AccountController
@@ -31,19 +33,32 @@ public class AccountController extends HttpServlet {
 		String page = request.getParameter("page");
 		if(page==null) {page="main";}
 		System.out.println("page ::"+ page);
-		
+		AccountService accountService = new AccountServiceImpl();
 		switch(cmd) {
 			case"open-account": 
 				System.out.println("=== 계좌 오픈 ===");
 				String deposit = request.getParameter("money");
+				String accNum = accountService.openAccount(Integer.parseInt(deposit));
+				AccountBean account = accountService.findByAccount(accNum);
+				request.setAttribute("acc",account);
 				System.out.println("deposit ::"+ deposit);
+				String dest = request.getParameter("dest");
+				request.setAttribute("dest", dest);
 				Command.move(request, response,dir,page);	
 			break;
 			case"move": 
 			System.out.println("action 이 무브");
+			dest = request.getParameter("dest");
+			System.out.println("dest ::"+dest);
+			if(dest==null) {
+				dest = "NONE";
+			}
+			System.out.println("dest(2) ::"+dest);
+			request.setAttribute("dest", dest);
 			Command.move(request, response, dir,page);
 			break;
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <table>
 	<tr>
-		<td>계좌 개설</td>
+		<td>
+		<a href="account.do?dest=open-form">계좌 개설</a>
+		</td>
 	</tr>
 	<tr>
 		<td>계좌 목록</td>

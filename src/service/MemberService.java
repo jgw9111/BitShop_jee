@@ -5,17 +5,13 @@ import java.util.ArrayList;
 import domain.MemberBean;
 
 public interface MemberService {	
-	//c
 		public void join();
-		//r
-		public ArrayList<MemberBean> findList();
-		//public ArrayList<MemberBean> find
-		public void findByName(String name);
-		public void countMember();
+		public ArrayList<MemberBean> findMembers();
+		public ArrayList<MemberBean> findByName(String name);
+		public MemberBean findByID(String id);
+		public void countMembers();
 		public boolean exsitMember();
-		//u
 		public void withdraw(int money);
 		public void deposit(int money);
-		//d
-		public void deleteMember(String MemberNum);
+		public void deleteMember();
 }

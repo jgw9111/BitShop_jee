@@ -44,6 +44,13 @@ public class MemberController extends HttpServlet {
 			break;
 		case"move": 
 			System.out.println("action 이 무브");
+			String dest = request.getParameter("dest");
+			System.out.println("dest ::"+dest);
+			if(dest==null) {
+				dest = "NONE";
+			}
+			System.out.println("dest(2) ::"+dest);
+			request.setAttribute("dest", dest);
 			Command.move(request, response, dir,page);
 			break;
 		}

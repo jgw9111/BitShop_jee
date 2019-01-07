@@ -4,6 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BIT SHOP+HOME+</title>
+<title>BIT SHOP</title>
 <link rel="stylesheet" href="<%=application.getContextPath() %>/resources/css/style.css "/>
 </head>

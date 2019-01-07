@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form action="open-result.jsp">
-		이름 : <input type="text" name = "name"/> <br />
-		비밀번호 : <input type="text" name = "pass" /><br />
-		<input type="submit" id="btn" value = "open" />
+<div id="open-form">
+	<form action="account.do">
+		<h1>계좌 개설</h1>
+		입금액 : <input type="text" name="money" />
+		<input type="submit" id="btn" value="확 인" />
+		<input type="hidden" name="cmd" value="open-account" />
+		<input type="hidden" name="dest" value="open-result" />
 	</form>
-	
-</body>
-</html>
+</div>

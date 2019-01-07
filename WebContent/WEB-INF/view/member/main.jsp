@@ -1,48 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>BIT SHOP+회원관리+</title>
-<link rel="stylesheet" href="<%=application.getContextPath() %>/resources/css/style.css "/>
-</head>
+<%@ include file="../home/head.jsp" %>
 <body>
 	<table id="wrapper">
 		<tr>
-			<td colspan="2">
-				<h1 style="text-align: center">BIT SHOP</h1>
-			</td>
+			<%@ include file = "../home/header.jsp" %>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<div class="menubar">
-					<ul>
-						<li><a href="home.do">홈</a></li>
-						<li><a href="member.do"><font color="yellow">회원관리</font></a></li>
-						<li><a href="account.do">계좌관리</a></li>
-						<li><a href="article.do">게시판</a></li>
-						<li><a href="admin.do">관리자</a></li>
-					</ul>
-				</div>
+				<%@ include file="../home/navi-bar.jsp" %>
 			</td>
 		</tr>
 		<tr style="height: 300px;">
 			<td id="side-menu">
-				<table>
-					<tr>
-						<td>안녕하세요</td>
-					</tr>
-					<tr>
-						<td>여기는</td>
-					</tr>
-					<tr>
-						<td>회원관리페이지입니다~</td>
-					</tr>
-				</table>
-
+				<%@ include file="side-menu.jsp" %>
 			</td>
-			<td></td>
+			<td>
+			<%
+			String dest = request.getAttribute("dest")+"";
+			System.out.println("member메인 dest ::" + dest);
+			switch(dest){
+			case "NONE" : 
+				%>
+					<%@ include file="myPage.jsp" %>
+				<%
+				break;
+			case "join-form": 
+				%>
+				<%@ include file="join-form.jsp" %>
+				<%
+				break;	
+			}
+				%>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<%@ include file="../home/footer.jsp" %>
+			</td>
 		</tr>
 	</table>
 </body>

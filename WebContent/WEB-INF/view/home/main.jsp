@@ -4,9 +4,7 @@
 <body>
 <table id="wrapper">
 	<tr>
-		<td colspan="2">
 		<%@ include file="header.jsp" %>
-		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
@@ -19,7 +17,9 @@
 		</td>
 		<td > 
 			<div id="content">
-				<% String compo = request.getAttribute("compo").toString();
+				<% String compo = String.valueOf(request.getAttribute("compo"));
+				if(compo==null){System.out.println("compo가 null");}
+				else{System.out.println("=아아=");}
 				switch(compo){
 				case"login-success":
 					%>
