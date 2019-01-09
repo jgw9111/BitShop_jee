@@ -1,12 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<div id="side-menu">
+<table>
+	<tr>
+		<td>관리자등록</td>
+	</tr>
+	<tr>
+		<td>회원목록</td>
+	</tr>
+	<tr>
+		<td>회원 검색(이름)</td>
+	</tr>
+	<tr>
+		<td>회원 검색(ID)</td>
+	</tr>
+	<tr>
+		<td>회원수</td>
+	</tr>
+	<tr>
+		<td>회원정보 수정</td>
+	</tr>
+	<tr>
+		<td>관리자탈퇴</td>
+	</tr>
+</table>
+</div>

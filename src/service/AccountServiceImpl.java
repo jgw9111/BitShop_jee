@@ -8,13 +8,17 @@ import java.util.Random;
 import domain.AccountBean;
 
 public class AccountServiceImpl implements AccountService {
-	private ArrayList<AccountBean> list;
+	private static AccountServiceImpl instance = new AccountServiceImpl();
+	private AccountServiceImpl() {}
+	public static AccountServiceImpl getInstance() {return instance;}
+	
+	/*private ArrayList<AccountBean> list;
 	public AccountServiceImpl() {
 		list = new ArrayList<>();
-	}
+	}*/
 
 	@Override
-	public String openAccount(int money) {
+	public void openAccount(int money) {
 		String openAccount = "";
 		Random random = new Random();
 		for(int i=0;i<8;i++) {
@@ -30,8 +34,7 @@ public class AccountServiceImpl implements AccountService {
 		account.setAccountNum(openAccount);
 		account.setMoney(money);
 		account.setToday(maketoday());
-		list.add(account);
-		return openAccount;
+		//list.add(account);
 	}
 
 	@Override
@@ -66,28 +69,29 @@ public class AccountServiceImpl implements AccountService {
 	@Override
 	public AccountBean findByAccount(String accountNum) {
 		AccountBean account = new AccountBean();
-		for(int i=0;i<list.size();i++) {
+		/*for(int i=0;i<list.size();i++) {
 			if(list.get(i).getAccountNum().equals(accountNum)) {
 				account = list.get(i);
 			}
-		}
+		}*/
 		return account;
 	}
 
 	@Override
 	public int count() {
-		return list.size();
+		int count = 0;
+		return count;
 	}
 
 	@Override
 	public boolean existAccountNum(String accountNum) {
 		boolean ok = false;
-		for(int i=0;i < list.size();i++) {
+		/*for(int i=0;i < list.size();i++) {
 			if(list.get(i).getAccountNum().equals(accountNum)) {
 				ok = true;
 				break;
 			}
-		}
+		}*/
 		return ok;
 	}
 

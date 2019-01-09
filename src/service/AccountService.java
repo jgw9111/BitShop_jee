@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import domain.AccountBean;
 
 public interface AccountService {
-	public String openAccount(int money);
+	public void openAccount(int money);
 	public String makeAccountNum();
 	public String maketoday();
 	

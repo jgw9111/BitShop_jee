@@ -20,3 +20,9 @@ DROP TABLE member;
 --인스턴스 생성--
 INSERT INTO member( id,name,pass,ssn )
 VALUES( 'hong' , '홍길동' , '1' , '900101-1234567' ) 
+
+--id로 찾기--
+SELECT *FROM member where id LIKE 'jeong';
+
+--테이블 row 삭제--
+DELETE FROM member where id LIKE 'jeong';
