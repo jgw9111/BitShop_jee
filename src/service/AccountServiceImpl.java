@@ -5,12 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
+import dao.AccountDAOImpl;
 import domain.AccountBean;
 
 public class AccountServiceImpl implements AccountService {
 	private static AccountServiceImpl instance = new AccountServiceImpl();
-	private AccountServiceImpl() {}
+	private AccountServiceImpl() {
+		dao = AccountDAOImpl.getInstance();
+	}
 	public static AccountServiceImpl getInstance() {return instance;}
+	public static AccountDAOImpl dao;
 	
 	/*private ArrayList<AccountBean> list;
 	public AccountServiceImpl() {
@@ -18,23 +22,8 @@ public class AccountServiceImpl implements AccountService {
 	}*/
 
 	@Override
-	public void openAccount(int money) {
-		String openAccount = "";
-		Random random = new Random();
-		for(int i=0;i<8;i++) {
-			if(i!=3) {
-				openAccount += random.nextInt(10);
-			}else if(i==0){
-				openAccount += random.nextInt(9)+1;
-			}else {
-				openAccount += random.nextInt(10)+"-";
-			}
-		}
-		AccountBean account = new AccountBean();
-		account.setAccountNum(openAccount);
-		account.setMoney(money);
-		account.setToday(maketoday());
-		//list.add(account);
+	public void openAccount(AccountBean account) {
+		dao.insertMakeAccount(account);
 	}
 
 	@Override
@@ -63,7 +52,8 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public ArrayList<AccountBean> findAll() {
-		return null;
+		ArrayList<AccountBean> list = new ArrayList<>();
+		return list;
 	}
 
 	@Override

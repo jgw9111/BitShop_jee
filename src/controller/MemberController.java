@@ -18,7 +18,6 @@ public class MemberController extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		MemberService memberService = MemberServiceImpl.getInstance();
 		MemberBean member = null;
 		
 		System.out.println("===member 서블릿으로 진입===");
@@ -67,9 +66,9 @@ public class MemberController extends HttpServlet {
 			member.setPass(request.getParameter("pass"));
 			member.setName(request.getParameter("name"));
 			member.setSsn(request.getParameter("ssn"));
-			MemberServiceImpl.getInstance().join(member);
+			MemberServiceImpl.getInstance().createMember(member);
 			request.setAttribute("dest","myPage");
-			request.setAttribute("member",MemberServiceImpl.getInstance().findByID(member.getId()));
+			request.setAttribute("member",MemberServiceImpl.getInstance().findMemberById(member.getId()));
 			Command.move(request, response, dir, page);
 			break;
 		}

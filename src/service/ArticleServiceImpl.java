@@ -1,5 +1,5 @@
 package service;
 
-public class ArticleServiceImpl {
+public class ArticleServiceImpl implements ArticleService {
 
 }

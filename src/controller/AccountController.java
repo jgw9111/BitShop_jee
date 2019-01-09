@@ -20,7 +20,6 @@ import service.AccountServiceImpl;
 public class AccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AccountService accountService = AccountServiceImpl.getInstance();
 		AccountBean account = null;
 		
 		System.out.println("=== account 서블릿으로 진입 ===");
@@ -40,8 +39,12 @@ public class AccountController extends HttpServlet {
 			case"open-account": 
 				System.out.println("=== 계좌 오픈 ===");
 				String deposit = request.getParameter("money");
-				//String accNum = accountService.openAccount(Integer.parseInt(deposit));
-				//account = accountService.findByAccount(accNum);
+				AccountServiceImpl.getInstance().openAccount(account);
+				//--String accNum = accountService.openAccount(Integer.parseInt(deposit));
+				account.setAccountNum(AccountServiceImpl.getInstance().makeAccountNum());
+				account.setMoney(Integer.parseInt(deposit));
+				account.setToday(AccountServiceImpl.getInstance().maketoday());
+				//AccountServiceImpl.getInstance().findByAccount(accountNum);
 				request.setAttribute("acc",account);
 				System.out.println("deposit ::"+ deposit);
 				String dest = request.getParameter("dest");
