@@ -19,8 +19,15 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		MemberBean member = null;
-		
+		MemberService memberService = MemberServiceImpl.getInstance();
 		System.out.println("===member 서블릿으로 진입===");
+		/**
+		 * 디폴트 값
+		 * cmd : move
+		 * dir : *
+		 * page : main
+		 * dest : NONE
+		 * */
 		String dir = request.getParameter("dir");
 		if(dir == null ) {
 			String dirPath = request.getServletPath();
@@ -35,28 +42,27 @@ public class MemberController extends HttpServlet {
 		System.out.println("page::"+page);
 		System.out.println("dir::"+dir);
 		String dest = request.getParameter("dest");
-		if(dest==null) {
-			dest = "NONE";
-		}
+		if(dest==null) {dest = "NONE";}
 		switch(cmd) {
 		case"login":
 			System.out.println("action 이 로그인");
 			String id = request.getParameter("uid");
 			String pass = request.getParameter("upass");
-			if(!(id.equals("test") && pass.equals("te"))) {
+			boolean loginOk = memberService.exsitMember(id, pass);
+			if(loginOk) {
 				dir = "";
 				page = "index";
+			}else {
+			member = memberService.findMemberById(id);
+			request.setAttribute("member", member);
+			request.setAttribute("dest" ,"welcome");
 			}
-			request.setAttribute("name", "test");
-			request.setAttribute("compo" ,"login-success");
-			Command.move(request, response,dir,page);
 			break;
 		case"move": 
 			System.out.println("action 이 무브");
 			System.out.println("dest ::"+dest);
 			System.out.println("dest(2) ::"+dest);
 			request.setAttribute("dest", dest);
-			Command.move(request, response, dir,page);
 			break;
 		case"join": 
 			System.out.println("cmd(3) ::"+cmd);
@@ -66,12 +72,19 @@ public class MemberController extends HttpServlet {
 			member.setPass(request.getParameter("pass"));
 			member.setName(request.getParameter("name"));
 			member.setSsn(request.getParameter("ssn"));
-			MemberServiceImpl.getInstance().createMember(member);
-			request.setAttribute("dest","myPage");
-			request.setAttribute("member",MemberServiceImpl.getInstance().findMemberById(member.getId()));
-			Command.move(request, response, dir, page);
+			memberService.createMember(member);
+			request.setAttribute("dest",dest);
+			member = memberService.findMemberById(member.getId());
+			System.out.println(">>>>조회 결과"+member.toString());
+			request.setAttribute("member", member );
+			break;
+		case"logout":
+			dir = "";
+			page = "index";
+			dest = "";
 			break;
 		}
+		Command.move(request, response, dir, page);
 
 	}
 

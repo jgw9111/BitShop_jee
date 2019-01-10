@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountBean findByAccount(String accountNum) {
+	public AccountBean findAccountById(String accountNum) {
 		AccountBean account = new AccountBean();
 		/*for(int i=0;i<list.size();i++) {
 			if(list.get(i).getAccountNum().equals(accountNum)) {

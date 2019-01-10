@@ -3,13 +3,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import domain.MemberBean;
 import factory.DatabaseFactory;
-import pool.Constant;
 
 public class MemberDAOImpl implements MemberDAO {
 	private static MemberDAOImpl instance = new MemberDAOImpl();
@@ -22,12 +20,16 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insertMember(MemberBean member) {
 		try {
-			DatabaseFactory.createDatabase("oracle").
+			int rs = DatabaseFactory.createDatabase("oracle").
 			getConnection().createStatement().
 			executeUpdate(String.format("INSERT INTO member( id,name,pass,ssn )\r\n" + 
 					"VALUES( '%s' , '%s' , '%s' , '%s' ) ", 
 					member.getId(),member.getName(),member.getPass(),member.getSsn()));
-	
+			if(rs ==1 ) {
+				System.out.println("==회원가입 성공==");
+			}else {
+				System.out.println("==회원가입 실패==");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -44,7 +46,7 @@ public class MemberDAOImpl implements MemberDAO {
 			String sql = String.format("", "");
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				
+				list.add(null);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -70,10 +72,16 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberBean selectMemberById(String id) {
-		MemberBean member = new MemberBean();
+		MemberBean member = null; // 값이 없을 수도 있으니, while문 안에서 
 		try {
-			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement().executeQuery(id);
+			rs = DatabaseFactory.createDatabase("oracle").getConnection().createStatement()
+					.executeQuery(String.format("SELECT * FROM member WHERE id LIKE '%s'",id));
 			while(rs.next()) { // 검색된 결과가 존재하면 TRUE 리턴
+				member = new MemberBean();
+				member.setId(rs.getString("id"));
+				member.setName(rs.getString("name"));
+				member.setPass(rs.getString("pass"));
+				member.setSsn(rs.getString("ssn"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

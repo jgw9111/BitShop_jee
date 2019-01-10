@@ -25,4 +25,4 @@ VALUES( 'hong' , '홍길동' , '1' , '900101-1234567' )
 SELECT *FROM member where id LIKE 'jeong';
 
 --테이블 row 삭제--
-DELETE FROM member where id LIKE 'jeong';
+DELETE FROM member where pass LIKE '1';

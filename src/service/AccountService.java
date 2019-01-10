@@ -9,7 +9,7 @@ public interface AccountService {
 	public String makeAccountNum();
 	public String maketoday();
 	public ArrayList<AccountBean> findAll();
-	public AccountBean findByAccount(String accountNum);
+	public AccountBean findAccountById(String accountNum);
 	public int count();
 	public boolean existAccountNum(String accountNum);
 	public void deposit(String accountNum,int money);

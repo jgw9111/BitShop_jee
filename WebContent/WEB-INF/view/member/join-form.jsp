@@ -8,10 +8,13 @@
 		비밀번호 입력<input type="text" name="pass" /> <br /> 
 		이름 입력<input type="text"	name="name" /> <br /> 
 		주민번호 입력<input type="text" name="ssn" /> <br />
-		키 <input type ="text" name = "height"> <br />
-		몸무게 <input type ="text" name = "weight"> <br />
+		<!-- 키 <input type ="text" name = "height"> <br />
+		몸무게 <input type ="text" name = "weight"> <br /> -->
 		<input type="submit" id="btn" value="join" />
 		<input type="hidden" name ="cmd" value="join"/>
+		
+		<input type="hidden" name ="dir" value="home"/>
+		<input type="hidden" name ="dest" value="welcome" />
 		
 	</form>
 </div>

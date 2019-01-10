@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<table>
+<table style="width :100%" >
 	<tr>
 		<td>
 		<a href="account.do?dest=open-form">계좌 개설</a>

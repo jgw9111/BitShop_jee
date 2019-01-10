@@ -17,13 +17,13 @@
 		</td>
 		<td > 
 			<div id="content">
-				<% String compo = String.valueOf(request.getAttribute("compo"));
-				if(compo==null){System.out.println("compo가 null");}
+				<% String dest = String.valueOf(request.getAttribute("dest"));
+				if(dest==null){System.out.println("dest:: null");}
 				else{System.out.println("=아아=");}
-				switch(compo){
-				case"login-success":
+				switch(dest){
+				case"welcome":
 					%>
-					<%@ include file ="login-success.jsp"  %>
+					<%@ include file ="welcome.jsp"  %>
 					<%
 				break;
 				}

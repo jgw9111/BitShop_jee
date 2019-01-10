@@ -38,9 +38,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberBean findMemberById(String id) {
-		MemberBean member = new MemberBean();
-		member = dao.selectMemberById(id);
-		return member;
+		return dao.selectMemberById(id);
 	}
 
 	@Override
@@ -54,6 +52,16 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean exsitMember(String id,String pass) {
 		boolean exsit = false;
+		MemberBean member = dao.selectMemberById(id);
+		if(member != null && (id.equals(member.getId()) && pass.equals(member.getPass()))) {
+			System.out.println("id >>" + id + " pass >>"+pass);
+			exsit = false;
+		}else {
+			System.out.println("id >>" + id + " pass >>"+pass);
+			System.out.println("id가 없나..?");
+			exsit = true;
+		}
+		
 		
 		return exsit;
 	}

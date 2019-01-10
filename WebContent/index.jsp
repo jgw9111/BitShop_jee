@@ -20,16 +20,17 @@
 							<table id="login-inner-tab">
 								<tr>
 									<td>
-									<input id="uid" name="uid" type="text" value="test" placeholder="ID" tabindex="1" />
+									<input id="uid" name="uid" type="text" placeholder="ID" tabindex="1" />
 									</td>
 									<td rowspan="2">
 										<button id="login-btn">LOGIN</button>
 									</td>
 								</tr>
 								<tr>
-									<td> <input id="upass" name="upass" type="password" value="te" placeholder="PASSWORD" tabindex="2">
+									<td> <input id="upass" name="upass" type="password" placeholder="PASSWORD" tabindex="2">
 										<input type="hidden" name="cmd" value="login" />
 										<input type="hidden" name="dir" value="home">
+										<input type="hidden" name="dest" value="welcome">
 									</td>
 								</tr>
 							</table>

@@ -20,8 +20,8 @@
 		String dest = request.getAttribute("dest")+"";
 		System.out.println("account메인 dest ::" + dest);
 		switch(dest){
-		case"NONE": %>
-			<%@ include file="accountPage.jsp" %>
+		case"NONE": case"account-detail": %>
+			<%@ include file="account-detail.jsp" %>
 		<%
 		break;
 		case"open-form": 

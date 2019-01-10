@@ -35,6 +35,8 @@ public class AccountController extends HttpServlet {
 		String page = request.getParameter("page");
 		if(page==null) {page="main";}
 		System.out.println("page ::"+ page);
+		String dest = request.getParameter("dest");
+		if(dest==null) { dest = "NONE";}
 		switch(cmd) {
 			case"open-account": 
 				System.out.println("=== 계좌 오픈 ===");
@@ -47,21 +49,20 @@ public class AccountController extends HttpServlet {
 				//AccountServiceImpl.getInstance().findByAccount(accountNum);
 				request.setAttribute("acc",account);
 				System.out.println("deposit ::"+ deposit);
-				String dest = request.getParameter("dest");
+				dest = request.getParameter("dest");
 				request.setAttribute("dest", dest);
 				Command.move(request, response,dir,page);	
 			break;
 			case"move": 
 			System.out.println("action 이 무브");
-			dest = request.getParameter("dest");
 			System.out.println("dest ::"+dest);
-			if(dest==null) {
-				dest = "NONE";
-			}
 			System.out.println("dest(2) ::"+dest);
 			request.setAttribute("dest", dest);
 			Command.move(request, response, dir,page);
 			break;
+			case"account-detail": 
+				//accountService
+				break;
 		}
 		
 	}
