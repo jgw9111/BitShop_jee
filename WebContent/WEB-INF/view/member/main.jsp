@@ -32,17 +32,21 @@
 			System.out.println("member메인 dest ::" + dest);
 			switch(dest){
 			case "NONE" : case "myPage":
-				%>
-					<%@ include file="myPage.jsp" %>
-				<%
 				break;
 			case "join-form": 
 				%>
 				<%@ include file="join-form.jsp" %>
 				<%
 				break;	
-			case "": 
-				
+			case "member-detail": 
+				%> 
+					<%@ include file="memberdetail.jsp" %>
+				<% 
+				break;
+			case "member-update":
+				%>
+					<%@ include file="memberupdate.jsp" %>
+				<%
 				break;
 			
 			}

@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ page import="domain.MemberBean" %>
 <%
-	MemberBean user = (MemberBean) request.getAttribute("member");
-	//String name = request.getAttribute("name").toString();
-	
+	MemberBean user = (MemberBean) session.getAttribute("user");
 %> 
 	<%=user.getName() %>님 환영합니다 <br />
 	<a href="member.do?cmd=logout">LOGOUT</a>

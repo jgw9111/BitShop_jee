@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import command.Command;
 import domain.MemberBean;
@@ -36,15 +37,20 @@ public class MemberController extends HttpServlet {
 		}
 		String cmd = request.getParameter("cmd");
 		cmd = (cmd == null) ? "move" : cmd;
+		
 		String page = request.getParameter("page");
 		if(page==null) {page="main";}
+		
 		System.out.println("cmd::"+cmd);
 		System.out.println("page::"+page);
 		System.out.println("dir::"+dir);
+		
 		String dest = request.getParameter("dest");
 		if(dest==null) {dest = "NONE";}
+		HttpSession session = request.getSession();
+		
 		switch(cmd) {
-		case"login":
+		case "login" :
 			System.out.println("action 이 로그인");
 			String id = request.getParameter("uid");
 			String pass = request.getParameter("upass");
@@ -54,17 +60,18 @@ public class MemberController extends HttpServlet {
 				page = "index";
 			}else {
 			member = memberService.findMemberById(id);
-			request.setAttribute("member", member);
+			session = request.getSession();
+			session.setAttribute("user", member);
 			request.setAttribute("dest" ,"welcome");
 			}
 			break;
-		case"move": 
+		case "move" : 
 			System.out.println("action 이 무브");
 			System.out.println("dest ::"+dest);
 			System.out.println("dest(2) ::"+dest);
 			request.setAttribute("dest", dest);
 			break;
-		case"join": 
+		case "join" : 
 			System.out.println("cmd(3) ::"+cmd);
 			System.out.println("dest(3) ::"+dest);
 			member = new MemberBean();
@@ -78,10 +85,17 @@ public class MemberController extends HttpServlet {
 			System.out.println(">>>>조회 결과"+member.toString());
 			request.setAttribute("member", member );
 			break;
-		case"logout":
+		case "logout" :
 			dir = "";
 			page = "index";
 			dest = "";
+			session.invalidate(); // 세션에서 값을 제거
+			break;
+		case "detail" :
+			request.setAttribute("dest",dest);
+			break;
+		case "update" :
+			request.setAttribute("dest",dest);
 			break;
 		}
 		Command.move(request, response, dir, page);
